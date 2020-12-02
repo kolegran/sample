@@ -2,4 +2,5 @@ unit-tests:
   image: adoptopenjdk/openjdk11:latest
   stage: test
   script:
+    - chmod +x gradlew
     - ./gradlew clean test
