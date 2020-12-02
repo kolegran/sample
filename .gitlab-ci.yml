@@ -1,4 +1,5 @@
-run-tests:
+unit-tests:
+  image: https://hub.docker.com/r/adoptopenjdk/openjdk11:latest
   stage: test
   script:
-    - gradlew test
+    - ./gradlew clean test
