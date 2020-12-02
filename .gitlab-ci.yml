@@ -1,5 +1,5 @@
 unit-tests:
-  image: https://hub.docker.com/r/adoptopenjdk/openjdk11:latest
+  image: adoptopenjdk/openjdk11:latest
   stage: test
   script:
     - ./gradlew clean test
