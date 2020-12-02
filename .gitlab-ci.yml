@@ -1,8 +1,4 @@
-java:
+run-tests:
   stage: test
   script:
     - gradlew test
-  artifacts:
-    when: always
-    reports:
-      junit: build/test-results/test/**/TEST-*.xml
