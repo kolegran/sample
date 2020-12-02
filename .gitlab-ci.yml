@@ -1,5 +1,11 @@
-unit-tests:
-  image: adoptopenjdk/openjdk11:latest
+services:
+  - docker:dind
+
+variables:
+  DOCKER_HOST: "tcp://docker:2375"
+
+tests:
+  image: gradle:latest
   stage: test
   script:
     - chmod +x gradlew
