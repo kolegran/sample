@@ -14,8 +14,9 @@ public class CupboardRepository {
     }
 
     public List<Cupboard> getAllCupboards() {
+        final String selectAllSql = "SELECT * FROM Cupboard";
         return jdbcTemplate.query(
-            "SELECT * FROM Cupboard",
+            selectAllSql,
             (rs, rowNum) -> new Cupboard(rs.getInt("id"), rs.getString("title"))
         );
     }
