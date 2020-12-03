@@ -14,3 +14,6 @@
 
 ##### For more details see:
 ```https://docs.gitlab.com/ee/ci/README.html```
+
+##### How to change file premissions in Git on Windows
+```http://blog.lesc.se/2011/11/how-to-change-file-premissions-in-git.html```
