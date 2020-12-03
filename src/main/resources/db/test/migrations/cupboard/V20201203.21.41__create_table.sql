@@ -1,0 +1,4 @@
+CREATE TABLE cupboard (
+    id SERIAL UNIQUE PRIMARY KEY,
+    title CHARACTER VARYING(32)
+);
