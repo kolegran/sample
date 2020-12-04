@@ -1,1 +1,1 @@
-docker build -t kolegran/sample:latest ../.
+docker build -t kolegran/sample:latest .
