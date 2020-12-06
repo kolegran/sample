@@ -1,7 +1,6 @@
 stages:
   - test
-  - build:jar
-  - build:docker-image
+  - build
 
 tests:
   services:
