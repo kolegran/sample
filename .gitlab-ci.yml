@@ -14,9 +14,14 @@ tests:
   script:
     - ./gradlew clean test
 
-build:
+build:jar:
   image: adoptopenjdk/openjdk11:latest
   stage: build
   script:
     - ./gradlew clean build -x test
+
+build:docker-image:
+  image: docker:latest
+  stage: build
+  script:
     - ./build.sh
