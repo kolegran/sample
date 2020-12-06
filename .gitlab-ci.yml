@@ -21,8 +21,8 @@ build:
   variables:
     DOCKER_HOST: "tcp://docker:2375"
 
-  image: kolegran/alpine-docker
+  image: kolegran/alpine-docker-openjdk-11
   stage: build
   script:
-#    - ./gradlew clean build -x test
+    - ./gradlew clean build -x test
     - ./build.sh
