@@ -1,6 +1,7 @@
 stages:
   - test
-  - build
+  - build:jar
+  - build:docker-image
 
 tests:
   services:
@@ -18,8 +19,8 @@ build:docker-image:
   services:
     - docker:dind
 
-    variables:
-      DOCKER_HOST: "tcp://docker:2375"
+  variables:
+    DOCKER_HOST: "tcp://docker:2375"
 
   image: docker:latest
   stage: build
