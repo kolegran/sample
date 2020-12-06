@@ -1,14 +1,14 @@
-services:
-  - docker:dind
-
-variables:
-  DOCKER_HOST: "tcp://docker:2375"
-
 stages:
   - test
   - build
 
 tests:
+  services:
+    - docker:dind
+
+  variables:
+    DOCKER_HOST: "tcp://docker:2375"
+
   image: adoptopenjdk/openjdk11:latest
   stage: test
   script:
