@@ -2,25 +2,19 @@ stages:
   - test
   - build
 
-tests:
-  services:
-    - docker:dind
+services:
+  - docker:dind
 
   variables:
     DOCKER_HOST: "tcp://docker:2375"
 
+tests:
   image: adoptopenjdk/openjdk11:latest
   stage: test
   script:
     - ./gradlew clean test
 
 build:
-  services:
-    - docker:dind
-
-  variables:
-    DOCKER_HOST: "tcp://docker:2375"
-
   image: kolegran/alpine-docker-opendjk-11
   stage: build
   script:
