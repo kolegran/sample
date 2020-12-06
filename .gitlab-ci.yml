@@ -9,3 +9,9 @@ tests:
   stage: test
   script:
     - ./gradlew clean test
+
+build:
+  stage: build
+  script:
+    - ./gradlew clean build -x test
+    - ./build.sh
