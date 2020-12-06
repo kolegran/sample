@@ -4,6 +4,10 @@ services:
 variables:
   DOCKER_HOST: "tcp://docker:2375"
 
+stages:
+  - test
+  - build
+
 tests:
   image: adoptopenjdk/openjdk11:latest
   stage: test
@@ -11,6 +15,7 @@ tests:
     - ./gradlew clean test
 
 build:
+  image: adoptopenjdk/openjdk11:latest
   stage: build
   script:
     - ./gradlew clean build -x test
