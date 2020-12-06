@@ -14,25 +14,9 @@ tests:
   script:
     - ./gradlew clean test
 
-build:jar:
-  image: adoptopenjdk/openjdk11:latest
+build:
+  image: kolegran/alpine-docker
   stage: build
   script:
-    - ./gradlew clean build -x test
-  artifacts:
-    paths:
-      - build/libs/
-
-build:docker-image:
-  services:
-    - docker:dind
-
-  variables:
-    DOCKER_HOST: "tcp://docker:2375"
-
-  image: docker:latest
-  stage: build
-  script:
+#    - ./gradlew clean build -x test
     - ./build.sh
-  dependencies:
-    - build:jar
