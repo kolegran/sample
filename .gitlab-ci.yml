@@ -1,7 +1,6 @@
 stages:
   - test
-  - build:jar
-  - build:docker-image
+  - build
 
 tests:
   services:
@@ -15,12 +14,6 @@ tests:
   script:
     - ./gradlew clean test
 
-build:jar:
-  image: adoptopenjdk/openjdk11:latest
-  stage: build
-  script:
-    - ./gradlew clean build -x test
-
 build:docker-image:
   services:
     - docker:dind
@@ -32,3 +25,9 @@ build:docker-image:
   stage: build
   script:
     - ./build.sh
+
+build:jar:
+  image: adoptopenjdk/openjdk11:latest
+  stage: build
+  script:
+    - ./gradlew clean build -x test
