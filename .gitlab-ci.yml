@@ -15,6 +15,12 @@ tests:
     - ./gradlew clean test
 
 build:
+  services:
+    - docker:dind
+
+  variables:
+    DOCKER_HOST: "tcp://docker:2375"
+
   image: kolegran/alpine-docker
   stage: build
   script:
