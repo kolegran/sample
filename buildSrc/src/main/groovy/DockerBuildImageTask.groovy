@@ -1,10 +1,10 @@
-import org.gradle.api.Plugin
-import org.gradle.api.Project
+import org.gradle.api.DefaultTask
+import org.gradle.api.tasks.TaskAction
 
-class SampleApplicationImageBuilder implements Plugin<Project> {
+class DockerBuildImageTask extends DefaultTask {
 
-    @Override
-    void apply(Project project) {
+    @TaskAction
+    void run() {
         File projectDirectory = project.rootProject.getProjectDir()
         String script = projectDirectory.getAbsolutePath() + "/build_and_push_docker_image.sh"
         script.execute()

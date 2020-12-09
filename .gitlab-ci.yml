@@ -19,3 +19,4 @@ build:
   stage: build
   script:
     - ./gradlew clean build -x test
+    - ./buildDockerImage
