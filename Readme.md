@@ -21,3 +21,9 @@
 ##### Test Containers in Java
 ```https://www.testcontainers.org/```
 ```https://www.testcontainers.org/test_framework_integration/junit_5/```
+
+##### Create Gradle Plugin (buildSrc)
+```https://stackoverflow.com/questions/32352816/what-the-difference-in-applying-gradle-plugin```
+```https://docs.gradle.org/current/userguide/custom_plugins.html```
+```https://www.jrebel.com/blog/using-buildsrc-custom-logic-gradle-builds```
+
