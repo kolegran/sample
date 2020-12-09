@@ -5,7 +5,8 @@ class SampleApplicationImageBuilder implements Plugin<Project> {
 
     @Override
     void apply(Project project) {
-        final String script = "cmd /c D:/kolegran/" + project.rootProject.name + "/build_and_push_docker_image.sh"
+        File projectDirectory = project.rootProject.getProjectDir()
+        String script = projectDirectory.getAbsolutePath() + "/build_and_push_docker_image.sh"
         script.execute()
     }
 }
