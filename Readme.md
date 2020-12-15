@@ -26,4 +26,3 @@
 ```https://stackoverflow.com/questions/32352816/what-the-difference-in-applying-gradle-plugin```
 ```https://docs.gradle.org/current/userguide/custom_plugins.html```
 ```https://www.jrebel.com/blog/using-buildsrc-custom-logic-gradle-builds```
-
