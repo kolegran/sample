@@ -1,5 +1,5 @@
 FROM openjdk:11-jre-slim
 
-COPY ../../../../build/libs/sample-0.0.1-SNAPSHOT.jar /app
+COPY ${PATH_TO_JAR}/${JAR} /app
 
-CMD java -jar /app/sample-0.0.1-SNAPSHOT.jar
+CMD java -jar /app/${JAR}
