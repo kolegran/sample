@@ -10,6 +10,8 @@ class DockerImageBuildTask extends DefaultTask {
     private static final String JAR_DIR = "libs"
     private static final String DOCKER_BUILD_SCRIPT = "build_docker_image.sh"
     private static final String DOCKERFILE = "Dockerfile"
+    private static final String SEPARATOR = File.separator
+    private final Path buildDirPath = getProject().getBuildDir().toPath()
 
     @TaskAction
     void run() {
@@ -17,17 +19,8 @@ class DockerImageBuildTask extends DefaultTask {
             modifyDockerBuildScript(DOCKER_BUILD_SCRIPT)
             modifyDockerfile(DOCKERFILE)
 
-            final Path buildDirPath = getProject().getBuildDir().toPath()
-            File file = new File(buildDirPath.toString() + "/" + DOCKER_BUILD_SCRIPT)
-            String text = file.getText()
-
-            final StringBuilder sout = new StringBuilder()
-            final StringBuilder serr = new StringBuilder()
-            final Process process = text.execute()
-            process.consumeProcessOutput(sout, serr)
-            process.waitForOrKill(1000)
-            println "out> $sout err> $serr"
-
+            final File file = new File(buildDirPath.toString() + SEPARATOR + DOCKER_BUILD_SCRIPT)
+            (file.getText()).execute()
         } catch (IOException e) {
             throw new HandleFileException(e)
         }
@@ -35,17 +28,18 @@ class DockerImageBuildTask extends DefaultTask {
 
     private String modifyDockerBuildScript(String resourceName) {
         final InputStream inputStream = getClass().getResourceAsStream(resourceName)
-        final String replaceDockerRepository = inputStream.getText().replace("{{DOCKER_REPOSITORY}}", DOCKER_REPOSITORY)
-        final String replaceUploadProjectName = replaceDockerRepository.replace("{{UPLOAD_PROJECT_NAME}}", getProject().getName())
-        createModifiedFile(resourceName, replaceUploadProjectName.getBytes())
+        final String modifiedScript = inputStream.getText()
+            .replace("{{DOCKER_REPOSITORY}}", DOCKER_REPOSITORY)
+            .replace("{{UPLOAD_PROJECT_NAME}}", getProject().getName())
+            .replace("{{BUILD_DIR}}", buildDirPath.toString())
+        createModifiedFile(resourceName, modifiedScript.getBytes())
     }
 
     private void modifyDockerfile(String resourceName) {
         final InputStream inputStream = getClass().getResourceAsStream(resourceName)
         final String replacePathToJar = inputStream.getText().replace("\${PATH_TO_JAR}", JAR_DIR)
 
-        final Path buildDirPath = getProject().getBuildDir().toPath()
-        final String pathToJar = buildDirPath.toString() + "/" + JAR_DIR
+        final String pathToJar = buildDirPath.toString() + SEPARATOR + JAR_DIR
         final File[] files = new File(pathToJar).listFiles()
         final String jarName = files[0].getName()
         final String replaceJarName = replacePathToJar.replace("\${JAR}", jarName)
@@ -53,7 +47,6 @@ class DockerImageBuildTask extends DefaultTask {
     }
 
     private void createModifiedFile(String resourceName, byte[] content) {
-        final Path buildDirPath = getProject().getBuildDir().toPath()
         Files.write(buildDirPath.resolve(resourceName), content)
     }
 
